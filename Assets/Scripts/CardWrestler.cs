@@ -4,38 +4,51 @@ using TMPro;
 
 public class CardWrestler : MonoBehaviour
 {
+    [Header("Données du catcheur")]
+    public CardWrestlerData wrestlerData;
+
     [Header("Références UI")]
+    public Image wrestlerImage;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI forceText;
     public TextMeshProUGUI vitesseText;
     public TextMeshProUGUI wowText;
+    public Slider healthBar;
 
-    [Header("Valeurs par défaut")]
-    public string defaultName;
-    public int defaultForce;
-    public int defaultVitesse;
-    public int defaultWow;
 
+    private Sprite wrestlerSprite;
     private string nom;
     private int force;
     private int vitesse;
     private int wow;
+    private int health;
 
-    private void updateCard()
+    private void Awake()
     {
+        updateDataCard();
+        updateUICard();
+    }
+
+    private void updateDataCard(){
+        if (wrestlerData != null)
+        {
+            wrestlerSprite = wrestlerData.wrestlerSprite;
+            nom = wrestlerData.wrestlerNom;
+            force = wrestlerData.force;
+            vitesse = wrestlerData.vitesse;
+            wow = wrestlerData.wow;
+            health = wrestlerData.health;
+        }
+    }
+
+
+    private void updateUICard()
+    {
+        wrestlerImage.sprite = wrestlerSprite;
         nameText.text = nom;
         forceText.text = force.ToString();
         vitesseText.text = vitesse.ToString();
         wowText.text = wow.ToString();
-    }
-
-    public void Start()
-    {
-        nom = defaultName;
-        force = defaultForce;
-        vitesse = defaultVitesse;
-        wow = defaultWow;
-        updateCard();
     }
 
     // Getters
@@ -63,18 +76,18 @@ public class CardWrestler : MonoBehaviour
     public void SetForce(int newForce)
     {
         force = newForce;
-        updateCard();
+        updateUICard();
     }
 
     public void SetVitesse(int newVitesse)
     {
         vitesse = newVitesse;
-        updateCard();
+        updateUICard();
     }
 
     public void SetWow(int newWow)
     {
         wow = newWow;
-        updateCard();
+        updateUICard();
     }
 }
