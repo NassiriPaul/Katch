@@ -29,7 +29,7 @@ public class CardWrestler : MonoBehaviour
         updateUICard();
     }
 
-    private void updateDataCard(){
+    public void updateDataCard(){
         if (wrestlerData != null)
         {
             wrestlerSprite = wrestlerData.wrestlerSprite;
@@ -42,7 +42,7 @@ public class CardWrestler : MonoBehaviour
     }
 
 
-    private void updateUICard()
+    public void updateUICard()
     {
         wrestlerImage.sprite = wrestlerSprite;
         nameText.text = nom;
@@ -88,6 +88,13 @@ public class CardWrestler : MonoBehaviour
     public void SetWow(int newWow)
     {
         wow = newWow;
+        updateUICard();
+    }
+
+    public void SetWrestlerData(CardWrestlerData newData)
+    {
+        wrestlerData = newData;
+        updateDataCard();
         updateUICard();
     }
 }
